@@ -1,5 +1,7 @@
 # Ethereum Environment Interface for Rust WebAssembly
 
+<a href="https://docs.rs/eei"><img src="https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square" alt="docs.rs docs" /></a>
+
 The Ethereum Environment Interface (EEI) is a set of functions exposed to WebAssembly modules used as Ethereum smart contracts.
 
 https://ewasm.readthedocs.io/en/mkdocs/eth_interface/
