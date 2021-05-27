@@ -6,7 +6,7 @@ edition = "2018"
 description="A hyper minimalistic but well documented interface to Ethereum Environment Interface"
 license = "MIT OR Apache-2.0"
 categories = ["wasm", "no-std"]
-repository = "https://github.com/richardanaya/eei"
+repository = "https://github.com/richardanaya/eei-rs"
 readme="README.md"
 
 
