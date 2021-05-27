@@ -9,8 +9,14 @@ extern "C" {
     /// * `amount`: the amount to subtract to the gas counter.
     pub fn ethereum_useGas(amount: i64);
 
-    /// Get the address of currently executing account and stores it in memory at the given offset.
+    /// Get the address of currently executing account.
     /// Arguments:
-    /// * `resultOffset`: the memory offset at which the address is to be stored.
-    pub fn ethereum_getAddress(resultOffset: *const Address);
+    /// * `address_ptr`: the memory location at which the address is to be stored.
+    pub fn ethereum_getAddress(address_ptr: *mut Address);
+
+    /// Gets ethereum balance of the given account.
+    /// Arguments:
+    /// * `address_ptr`: The memory location to load the address from.
+    /// * `amount_ptr`:  The memory location to load the balance into.
+    pub fn ethereum_getExternalBalance(address_ptr: *const Address, amount_ptr: *mut u128);
 }
