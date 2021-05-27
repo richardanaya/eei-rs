@@ -1,1 +1,1 @@
-# Ethereum Environment Interface
+# Ethereum Environment Interface for Rust WebAssembly
