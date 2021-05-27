@@ -5,6 +5,7 @@ pub type Address = &'static [u8; 20];
 pub type Amount = &'static [u8; 16];
 pub type Hash = &'static [u8; 32];
 
+#[repr(C)]
 pub enum CallResult {
     Success = 0,
     Failure = 1,
