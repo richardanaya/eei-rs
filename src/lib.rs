@@ -49,4 +49,15 @@ extern "C" {
         data_ptr: *const u8,
         data_length: i32,
     ) -> CallResult;
+
+    /// Get data from the current environment's input data.
+    /// Arguments:
+    /// * `result_ptr`: The memory location where to copy the result to.
+    /// * `input_offset`: The memory location to load input data from.
+    /// * `input_length`:  The length in bytes of input data to copy.
+    pub fn ethereum_callDataCopy(result_ptr: *mut u8, input_offset: *mut u8, input_length: i32);
+
+    /// Get size of input data in current environment's message or transaction.
+    /// Returns the length in bytes.
+    pub fn ethereum_getCallDataSize() -> i32;
 }
