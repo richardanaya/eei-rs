@@ -130,4 +130,10 @@ extern "C" {
     /// Arguments:
     /// * `address_ptr`: The pointer to memory where to put the address
     pub fn ethereum_getCaller(address_ptr: *mut Address);
+
+    /// Get the deposited ether value of this transaction and puts the amount in memory.
+    ///
+    /// Arguments:
+    /// * `amount_ptr`: The pointer to memory where to put the amount
+    pub fn ethereum_getCallValue(amount_ptr: *mut Amount);
 }

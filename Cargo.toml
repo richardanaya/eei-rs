@@ -1,6 +1,6 @@
 [package]
 name = "eei"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["Richard Anaya"]
 edition = "2018"
 description="A hyper minimalistic but well documented interface to Ethereum Environment Interface"
