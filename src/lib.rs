@@ -1,11 +1,13 @@
 #![no_std]
 
-/// A 160 bit number, represented as a 20 bytes long little endian unsigned integer in memory.
+/// A 160 bit number representing an ethereum address.
 pub type Address = &'static [u8; 20];
 // A 128 bit number representing an amount of ether
 pub type Amount = &'static [u8; 16];
+// A 256 bit number representing data
+pub type Data = &'static [u8; 32];
 // A 256 bit number representing a node's hash
-pub type Hash = &'static [u8; 32];
+pub type Hash = Data;
 
 // A result number for a call
 #[repr(C)]
@@ -71,4 +73,61 @@ extern "C" {
     ///
     /// Returns the length in bytes.
     pub fn ethereum_getCallDataSize() -> i32;
+
+    /// DEPRECATED, use callDelegate.
+    pub fn ethereum_callCode(
+        gas_limit: i64,
+        address_ptr: *const Address,
+        ether_amount_ptr: *const Amount,
+        data_ptr: *const u8,
+        data_length: i32,
+    ) -> CallResult;
+
+    /// Call another contract on behalf of the original caller.
+    ///
+    /// Arguments:
+    /// * `gas_limit`: The gas limit of the message.
+    /// * `address_ptr`: The memory location to load the address from.
+    /// * `data_ptr`:  The memory location to load the data from.
+    /// * `data_length`:  The length in bytes of data to send.
+    pub fn ethereum_callDelegate(
+        gas_limit: i64,
+        address_ptr: *const Address,
+        data_ptr: *const u8,
+        data_length: i32,
+    ) -> CallResult;
+
+    /// Call a node by it's address, but do not modify it's state. This can be used for testing a transaction.
+    ///
+    /// Arguments:
+    /// * `gas_limit`: The gas limit of the message.
+    /// * `address_ptr`: The memory location to load the address from.
+    /// * `data_ptr`:  The memory location to load the data from.
+    /// * `data_length`:  The length in bytes of data to send.
+    pub fn ethereum_callStatic(
+        gas_limit: i64,
+        address_ptr: *const Address,
+        data_ptr: *const u8,
+        data_length: i32,
+    ) -> CallResult;
+
+    /// Store data from memory
+    ///
+    /// Arguments:
+    /// * `path_ptr`: The path in storage
+    /// * `data_ptr`: The pointer to data
+    pub fn ethereum_storeData(path_ptr: *const Data, data_ptr: *const Data);
+
+    /// Load data from storage into memory.
+    ///
+    /// Arguments:
+    /// * `path_ptr`: The path in storage
+    /// * `data_ptr`: The pointer to memory where to put data
+    pub fn ethereum_loadData(path_ptr: *const Data, data_ptr: *mut Data);
+
+    /// Get the address of the caller and put it in memory.
+    ///
+    /// Arguments:
+    /// * `address_ptr`: The pointer to memory where to put the address
+    pub fn ethereum_getCaller(address_ptr: *mut Address);
 }
