@@ -216,7 +216,7 @@ extern "C" {
     /// * `topic_1_ptr`: the pointer to memory where the topic 1 value is.
     /// * `topic_2_ptr`: the pointer to memory where the topic 2 value is.
     /// * `topic_3_ptr`: the pointer to memory where the topic 3 value is.
-    pub fn ethereum_getTxGasPrice(
+    pub fn ethereum_log(
         data_ptr: *const u8,
         data_length: i32,
         number_of_topics: i32,
