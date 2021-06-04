@@ -136,4 +136,136 @@ extern "C" {
     /// Arguments:
     /// * `amount_ptr`: The pointer to memory where to put the amount
     pub fn ethereum_getCallValue(amount_ptr: *mut Amount);
+
+    /// Copy bytes of code into memory.
+    ///
+    /// Arguments:
+    /// * `code_ptr`: The pointer to memory where to put the code bytes.
+    /// * `code_offset`: the offset in code bytes to begin copying bytes.
+    /// * `length`: the number of bytes to copy.
+    pub fn ethereum_codeCopy(code_ptr: *mut u8, code_offset: i32, length: i32);
+
+    /// Get the size of the current code running in bytes.
+    pub fn ethereum_getCodeSize() -> i32;
+
+    /// Get the address of the beneficiary.
+    ///
+    /// Arguments:
+    /// * `address_ptr`: the memory location at which the address is to be stored.
+    pub fn ethereum_getBlockCoinbase(address_ptr: *mut Address);
+
+    /// Create a new contract
+    ///
+    /// Arguments:
+    /// * `address_ptr`: the memory location at which the address of the created contract to be stored.
+    /// * `amount_ptr`: the amount of ether to give the contract
+    /// * `code_ptr`:  The memory location to load the code from.
+    /// * `code_length`:  The length in bytes of code to send.
+    pub fn ethereum_create(
+        address_ptr: *mut Address,
+        amount_ptr: *mut Amount,
+        code_ptr: *const u8,
+        code_length: i32,
+    ) -> CallResult;
+
+    /// Get the difficulty of the current block
+    ///
+    /// Arguments:
+    /// * `difficulty_ptr`: the memory location at which the difficulty is to be stored.
+    pub fn ethereum_getBlockDifficulty(difficulty_ptr: *mut Data);
+
+    /// Copy bytes of code into memory.
+    ///
+    /// Arguments:
+    /// * `address_ptr`: the acontract to copy code from
+    /// * `result_ptr`: The pointer to memory where to put the code bytes.
+    /// * `code_offset`: the offset in code bytes to begin copying bytes.
+    /// * `length`: the number of bytes to copy.
+    pub fn ethereum_externalCodecodeCopy(
+        address_ptr: *const Address,
+        result_ptr: *mut u8,
+        code_offset: i32,
+        length: i32,
+    );
+
+    /// Get the size of of a contract's code in bytes.
+    ///
+    /// Arguments:
+    /// * `address_ptr`: the contract address to get the size from
+    pub fn ethereum_getExternalCodeSize(address_ptr: *const Address) -> i32;
+
+    /// Get the gas left
+    pub fn ethereum_getGasLeft() -> i64;
+
+    /// Get the blocks gas limit
+    pub fn ethereum_getBlockGasLimit() -> i64;
+
+    /// Get the blocks gas limit
+    ///
+    /// Arguments:
+    /// * `address_ptr`: the pointer to memory where to put the gas price amount.
+    pub fn ethereum_getTxGasPrice(ether_amount_ptr: *mut Amount);
+
+    /// Create a log on the current block
+    ///
+    /// Arguments:
+    /// * `data_ptr`: the pointer to memory where where the log message begins.
+    /// * `data_length`: the length of data in bytes of the log message.
+    /// * `number_of_topics`: the number of topics to send this log to.
+    /// * `topic_0_ptr`: the pointer to memory where the topic 0 value is.
+    /// * `topic_1_ptr`: the pointer to memory where the topic 1 value is.
+    /// * `topic_2_ptr`: the pointer to memory where the topic 2 value is.
+    /// * `topic_3_ptr`: the pointer to memory where the topic 3 value is.
+    pub fn ethereum_getTxGasPrice(
+        data_ptr: *const u8,
+        data_length: i32,
+        number_of_topics: i32,
+        topic_0_ptr: *const Data,
+        topic_1_ptr: *const Data,
+        topic_2_ptr: *const Data,
+        topic_3_ptr: *const Data,
+    );
+
+    /// Get the blocks number
+    pub fn ethereum_getBlockNumber() -> i64;
+
+    /// Get the address of origination of this contracts execution
+    ///
+    /// Arguments:
+    /// * `address_ptr`: the memory location at which the address is to be stored.
+    pub fn ethereum_getTxOrigin(address_ptr: *mut Address);
+
+    /// Stop execution and return output data.
+    ///
+    /// Arguments:
+    /// * `data_ptr`: the pointer to memory where where the output begins.
+    /// * `data_length`: the length of data in bytes of the output.
+    pub fn ethereum_finish(data_ptr: *const u8, data_length: i32);
+
+    /// Stop execution and reverts state and returns output data.
+    ///
+    /// Arguments:
+    /// * `data_ptr`: the pointer to memory where where the output begins.
+    /// * `data_length`: the length of data in bytes of the output.
+    pub fn ethereum_finish(data_ptr: *const u8, data_length: i32);
+
+    /// Get the return data size of call, callCode, callDelegate, callStatic or create.
+    pub fn ethereum_getReturnDataSize() -> i32;
+
+    /// Get the return data of call, callCode, callDelegate, callStatic or create.
+    ///
+    /// Arguments:
+    /// * `result_ptr`: the pointer to memory where where the return data should be put.
+    /// * `data_offset`: the offset into the return data to start copying from.
+    /// * `data_length`: the length of data of the return data to get.
+    pub fn ethereum_returnDataCopy(result_ptr: *mut u8, data_offset: i32, data_length: i32);
+
+    /// Self destruct this contract and give its ether to someone.
+    ///
+    /// Arguments:
+    /// * `address_ptr`: address of a beneficiary in memory.
+    pub fn ethereum_selfDestruct(address_ptr: *const Address);
+
+    /// Get the blocks timestamp
+    pub fn ethereum_getBlockTimestamp() -> i64;
 }
