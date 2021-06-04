@@ -242,13 +242,6 @@ extern "C" {
     /// * `data_length`: the length of data in bytes of the output.
     pub fn ethereum_finish(data_ptr: *const u8, data_length: i32);
 
-    /// Stop execution and reverts state and returns output data.
-    ///
-    /// Arguments:
-    /// * `data_ptr`: the pointer to memory where where the output begins.
-    /// * `data_length`: the length of data in bytes of the output.
-    pub fn ethereum_finish(data_ptr: *const u8, data_length: i32);
-
     /// Get the return data size of call, callCode, callDelegate, callStatic or create.
     pub fn ethereum_getReturnDataSize() -> i32;
 
